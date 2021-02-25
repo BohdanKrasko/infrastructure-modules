@@ -8,6 +8,12 @@
         "containerPort": 8080,
         "hostPort": 8080
       }
+    ],
+    "environment": [
+      {
+        "name": "DB_URI",
+        "value": "mongodb://mongo.prod-todo:27017/?compressors=disabled&gssapiServiceName=mongodb"
+      }
     ]
   }
 ]

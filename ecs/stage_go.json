@@ -1,0 +1,19 @@
+[
+  {
+    "name": "go",
+    "image": "kraskobohdan/to-do-app:go",
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 8080,
+        "hostPort": 8080
+      }
+    ],
+    "environment": [
+      {
+        "name": "DB_URI",
+        "value": "mongodb://mongo.stage-todo:27017/?compressors=disabled&gssapiServiceName=mongodb"
+      }
+    ]
+  }
+]

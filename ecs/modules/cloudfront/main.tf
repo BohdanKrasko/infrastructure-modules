@@ -53,7 +53,7 @@ resource "aws_cloudfront_distribution" "www_distribution" {
 
   // Here's where our certificate is loaded in!
   viewer_certificate {
-    acm_certificate_arn = "arn:aws:acm:us-east-1:882500013896:certificate/53cd4f95-c9aa-48a4-a222-a7c4d49246e6"
+    acm_certificate_arn = var.acm_certificate_arn
     ssl_support_method  = "sni-only"
   }
 }

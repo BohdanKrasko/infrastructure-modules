@@ -63,7 +63,7 @@ resource "aws_route_table_association" "subnet-association-public" {
 }
 
 resource "aws_lb_target_group" "go" {
-  name        = "go-target-group"
+  name        = var.aws_lb_target_group
   port        = 8080
   protocol    = "HTTP"
   target_type = "ip"
@@ -76,7 +76,7 @@ resource "aws_lb_target_group" "go" {
 
 
 resource "aws_lb" "go" {
-  name               = "go"
+  name               = var.aws_lb_name
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lb_sg.id]
@@ -101,7 +101,7 @@ resource "aws_lb_listener" "go-https" {
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:acm:us-east-1:882500013896:certificate/53cd4f95-c9aa-48a4-a222-a7c4d49246e6"
+  certificate_arn   = var.acm_certificate_arn
 
   default_action {
     type             = "forward"
@@ -110,12 +110,12 @@ resource "aws_lb_listener" "go-https" {
 }
 
 resource "aws_service_discovery_private_dns_namespace" "go" {
-  name        = "todo"
+  name        = var.aws_service_discovery_private_dns_namespace_go_name
   vpc         = aws_vpc.vpc.id
 }
 
 resource "aws_service_discovery_service" "mongo" {
-  name = "mongo"
+  name = var.aws_service_discovery_service_mongo_name
 
   dns_config {
     namespace_id = aws_service_discovery_private_dns_namespace.go.id
@@ -139,12 +139,12 @@ resource "aws_service_discovery_service" "mongo" {
 
 
 resource "aws_ecs_cluster" "todo" {
-  name = "todo"
+  name = var.aws_ecs_cluster_name
   capacity_providers = ["FARGATE"]
 }
 
 resource "aws_ecs_task_definition" "mongo" {
-  family                = "mongo"
+  family                = var.aws_ecs_task_definition_mongo_family
   container_definitions = file("mongo.json")
   network_mode = "awsvpc"
   execution_role_arn = "arn:aws:iam::882500013896:role/ecsTaskExecutionRole"
@@ -155,8 +155,8 @@ resource "aws_ecs_task_definition" "mongo" {
 }
 
 resource "aws_ecs_task_definition" "go" {
-  family                = "go"
-  container_definitions = file("go.json")
+  family                = var.aws_ecs_task_definition_go_family
+  container_definitions = file(var.prod_json_go)
   network_mode = "awsvpc"
   execution_role_arn = "arn:aws:iam::882500013896:role/ecsTaskExecutionRole"
   
@@ -166,7 +166,7 @@ resource "aws_ecs_task_definition" "go" {
 }
 
 resource "aws_ecs_service" "mongo" {
-  name            = "mongo"
+  name            = var.aws_ecs_service_mongo_name
   cluster         = aws_ecs_cluster.todo.id
   task_definition = aws_ecs_task_definition.mongo.arn
   desired_count   = 1
@@ -187,7 +187,7 @@ resource "aws_ecs_service" "mongo" {
 }
 
 resource "aws_ecs_service" "go" {
-  name            = "go"
+  name            = var.aws_ecs_service_go_name
   cluster         = aws_ecs_cluster.todo.id
   task_definition = aws_ecs_task_definition.go.arn
   desired_count   = 1
@@ -216,7 +216,7 @@ resource "aws_ecs_service" "go" {
 
 resource "aws_route53_record" "go" {
   zone_id = "Z05340611QTGXY4HN6R2I"
-  name    = "go.ekstodoapp.tk"
+  name    = var.aws_route53_record_go_name
   type    = "A"
 
   alias {
@@ -228,7 +228,7 @@ resource "aws_route53_record" "go" {
 
 resource "aws_route53_record" "clodfront" {
   zone_id = "Z05340611QTGXY4HN6R2I"
-  name    = "www.ekstodoapp.tk"
+  name    = var.aws_route53_record_clodfront_name
   type    = "A"
 
   alias {

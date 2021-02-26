@@ -10,7 +10,7 @@ resource "aws_s3_bucket" "b" {
             "Effect": "Allow",
             "Principal": "*",
             "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::s3-bucket-frontend-todo-app-www.ekstodoapp.tk/*"
+            "Resource": "arn:aws:s3:::{aws_s3_bucket.b.bucket}/*"
         }
     ]
 }

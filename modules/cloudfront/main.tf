@@ -13,7 +13,7 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     }
 
     // Here we're using our S3 bucket's URL!
-    domain_name = "www.ekstodoapp.tk.s3-website.eu-west-3.amazonaws.com"
+    domain_name = var.s3_website_endpoint
     // This can be any name to identify this origin.
     origin_id   = var.domain_name
   }

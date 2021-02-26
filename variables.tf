@@ -96,3 +96,7 @@ variable "prod_json_go" {
   default = "prod_go.json"
 }
 
+variable "s3_bucket_name" {
+  type = string
+}
+

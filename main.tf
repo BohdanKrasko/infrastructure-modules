@@ -1,3 +1,9 @@
+module "s3" {
+  source = "./modules/s3"
+  s3_bucket_name = var.s3_bucket_name
+  go_server = var.aws_route53_record_go_name
+}
+
 module "network" {
   source          = "./modules/network"
   vpc_name        = var.vpc_name
@@ -26,4 +32,5 @@ module "cloudfront" {
   source = "./modules/cloudfront"
   domain_name = var.aws_route53_record_clodfront_name
   acm_certificate_arn = var.acm_certificate_arn
+  s3_website_endpoint = module.s3.s3_website_endpoint
 }

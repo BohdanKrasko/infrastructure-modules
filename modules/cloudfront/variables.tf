@@ -5,3 +5,7 @@ variable "domain_name" {
 variable "acm_certificate_arn" {
   type = string
 }
+
+variable "s3_website_endpoint" {
+  type = string
+}

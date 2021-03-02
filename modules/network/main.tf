@@ -181,6 +181,10 @@ resource "aws_ecs_service" "mongo" {
 
   launch_type = "FARGATE"
 
+  lifecycle {
+    ignore_changes = [desired_count, tags]
+  }
+
   service_registries {
     registry_arn = aws_service_discovery_service.mongo.arn
   }
@@ -208,6 +212,9 @@ resource "aws_ecs_service" "go" {
 
   launch_type = "FARGATE"
 
+  lifecycle {
+    ignore_changes = [desired_count, tags]
+  }
   depends_on = [
     aws_lb.go, 
     aws_lb_target_group.go

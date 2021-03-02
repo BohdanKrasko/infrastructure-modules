@@ -56,4 +56,9 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     acm_certificate_arn = var.acm_certificate_arn
     ssl_support_method  = "sni-only"
   }
+
+  lambda_function_association {
+      event_type   = "origin-response"
+      lambda_arn   = "arn:aws:lambda:us-east-1:882500013896:function:hello-js:4"
+  }
 }

@@ -57,8 +57,11 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     ssl_support_method  = "sni-only"
   }
 
-  lambda_function_association {
+  ordered_cache_behavior {
+    
+    lambda_function_association {
       event_type   = "origin-response"
       lambda_arn   = "arn:aws:lambda:us-east-1:882500013896:function:hello-js:4"
+    }
   }
 }

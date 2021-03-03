@@ -1,7 +1,10 @@
 [
   {
     "name": "go",
-    "image": "kraskobohdan/to-do-app:go",
+    "repositoryCredentials": {
+      "credentialsParameter": "arn:aws:secretsmanager:us-east-1:882500013896:secret:nexus-m8ETfq"
+    },
+    "image": "030209dbcac4.ngrok.io/repository/krasko:wed",
     "essential": true,
     "portMappings": [
       {

@@ -100,3 +100,6 @@ variable "s3_bucket_name" {
   type = string
 }
 
+variable "go_image" {
+  type = string
+}

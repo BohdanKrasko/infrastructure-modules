@@ -156,7 +156,30 @@ resource "aws_ecs_task_definition" "mongo" {
 
 resource "aws_ecs_task_definition" "go" {
   family                = var.aws_ecs_task_definition_go_family
-  container_definitions = file(var.prod_json_go)
+  container_definitions = <<TASK_DEFINITION
+[
+  {
+    "name": "go",
+    "repositoryCredentials": {
+      "credentialsParameter": "arn:aws:secretsmanager:us-east-1:882500013896:secret:nexus-m8ETfq"
+    },
+    "image": "${var.go_image}",
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 8080,
+        "hostPort": 8080
+      }
+    ],
+    "environment": [
+      {
+        "name": "DB_URI",
+        "value": "mongodb://mongo.prod-todo:27017/?compressors=disabled&gssapiServiceName=mongodb"
+      }
+    ]
+  }
+]
+TASK_DEFINITION
   network_mode = "awsvpc"
   execution_role_arn = "arn:aws:iam::882500013896:role/ecsTaskExecutionRole"
   

@@ -79,3 +79,7 @@ variable "acm_certificate_arn" {
 variable "prod_json_go" {
   type = string
 }
+
+variable "go_image" {
+  type = string
+}

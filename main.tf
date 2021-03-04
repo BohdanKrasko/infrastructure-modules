@@ -26,6 +26,7 @@ module "network" {
   acm_certificate_arn = var.acm_certificate_arn
   prod_json_go = var.prod_json_go
   go_image = var.go_image
+  env = var.env
 
 }
 

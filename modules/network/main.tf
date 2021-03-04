@@ -174,7 +174,7 @@ resource "aws_ecs_task_definition" "go" {
     "environment": [
       {
         "name": "DB_URI",
-        "value": "mongodb://mongo.prod-todo:27017/?compressors=disabled&gssapiServiceName=mongodb"
+        "value": "mongodb://mongo.${var.env}-todo:27017/?compressors=disabled&gssapiServiceName=mongodb"
       }
     ]
   }

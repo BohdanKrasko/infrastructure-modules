@@ -83,3 +83,7 @@ variable "prod_json_go" {
 variable "go_image" {
   type = string
 }
+
+variable "env" {
+  type = string
+}

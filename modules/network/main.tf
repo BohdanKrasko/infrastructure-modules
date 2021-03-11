@@ -110,8 +110,8 @@ resource "aws_lb_listener" "go-https" {
 }
 
 resource "aws_service_discovery_private_dns_namespace" "go" {
-  name        = var.aws_service_discovery_private_dns_namespace_go_name
-  vpc         = aws_vpc.vpc.id
+  name = var.aws_service_discovery_private_dns_namespace_go_name
+  vpc  = aws_vpc.vpc.id
 }
 
 resource "aws_service_discovery_service" "mongo" {
@@ -137,15 +137,15 @@ resource "aws_service_discovery_service" "mongo" {
 resource "aws_iam_role" "ecs_task_role" {
   name = "ecs_task_role"
   assume_role_policy = jsonencode({
-    "Version": "2008-10-17",
-    "Statement": [
+    "Version" : "2008-10-17",
+    "Statement" : [
       {
-        "Sid": "",
-        "Effect": "Allow",
-        "Principal": {
-          "Service": "ecs-tasks.amazonaws.com"
+        "Sid" : "",
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "ecs-tasks.amazonaws.com"
         },
-        "Action": "sts:AssumeRole"
+        "Action" : "sts:AssumeRole"
       }
     ]
   })
@@ -155,19 +155,19 @@ resource "aws_iam_role" "ecs_task_role" {
 
 
 resource "aws_ecs_cluster" "todo" {
-  name = var.aws_ecs_cluster_name
+  name               = var.aws_ecs_cluster_name
   capacity_providers = ["FARGATE"]
 }
 
 resource "aws_ecs_task_definition" "mongo" {
   family                = var.aws_ecs_task_definition_mongo_family
   container_definitions = file("mongo.json")
-  network_mode = "awsvpc"
-  execution_role_arn = aws_iam_role.ecs_task_role.arn
-  
+  network_mode          = "awsvpc"
+  execution_role_arn    = aws_iam_role.ecs_task_role.arn
+
   requires_compatibilities = ["FARGATE"]
-  cpu = 256
-  memory = 512
+  cpu                      = 256
+  memory                   = 512
 }
 
 resource "aws_ecs_task_definition" "go" {
@@ -196,26 +196,26 @@ resource "aws_ecs_task_definition" "go" {
   }
 ]
 TASK_DEFINITION
-  network_mode = "awsvpc"
-  execution_role_arn = aws_iam_role.ecs_task_role.arn
-  
+  network_mode          = "awsvpc"
+  execution_role_arn    = aws_iam_role.ecs_task_role.arn
+
   requires_compatibilities = ["FARGATE"]
-  cpu = 256
-  memory = 512
+  cpu                      = 256
+  memory                   = 512
 }
 
 resource "aws_ecs_service" "mongo" {
-  name            = var.aws_ecs_service_mongo_name
-  cluster         = aws_ecs_cluster.todo.id
-  task_definition = aws_ecs_task_definition.mongo.arn
-  desired_count   = 1
-  deployment_maximum_percent = 200
+  name                               = var.aws_ecs_service_mongo_name
+  cluster                            = aws_ecs_cluster.todo.id
+  task_definition                    = aws_ecs_task_definition.mongo.arn
+  desired_count                      = 1
+  deployment_maximum_percent         = 200
   deployment_minimum_healthy_percent = 100
 
   network_configuration {
-    security_groups = [aws_security_group.mongo_sg.id]
+    security_groups  = [aws_security_group.mongo_sg.id]
     assign_public_ip = true
-    subnets = aws_subnet.public.*.id
+    subnets          = aws_subnet.public.*.id
   }
 
   launch_type = "FARGATE"
@@ -230,11 +230,11 @@ resource "aws_ecs_service" "mongo" {
 }
 
 resource "aws_ecs_service" "go" {
-  name            = var.aws_ecs_service_go_name
-  cluster         = aws_ecs_cluster.todo.id
-  task_definition = aws_ecs_task_definition.go.arn
-  desired_count   = 1
-  deployment_maximum_percent = 200
+  name                               = var.aws_ecs_service_go_name
+  cluster                            = aws_ecs_cluster.todo.id
+  task_definition                    = aws_ecs_task_definition.go.arn
+  desired_count                      = 1
+  deployment_maximum_percent         = 200
   deployment_minimum_healthy_percent = 100
 
   load_balancer {
@@ -244,9 +244,9 @@ resource "aws_ecs_service" "go" {
   }
 
   network_configuration {
-    security_groups = [aws_security_group.go_sg.id]
+    security_groups  = [aws_security_group.go_sg.id]
     assign_public_ip = true
-    subnets = aws_subnet.public.*.id
+    subnets          = aws_subnet.public.*.id
   }
 
   launch_type = "FARGATE"
@@ -255,13 +255,13 @@ resource "aws_ecs_service" "go" {
     ignore_changes = [desired_count, tags]
   }
   depends_on = [
-    aws_lb.go, 
+    aws_lb.go,
     aws_lb_target_group.go
   ]
 }
 
 resource "aws_route53_record" "go" {
-  zone_id = "Z05340611QTGXY4HN6R2I"
+  zone_id = var.public_hosted_zone_id
   name    = var.aws_route53_record_go_name
   type    = "A"
 
@@ -273,7 +273,7 @@ resource "aws_route53_record" "go" {
 }
 
 resource "aws_route53_record" "clodfront" {
-  zone_id = "Z05340611QTGXY4HN6R2I"
+  zone_id = var.public_hosted_zone_id
   name    = var.aws_route53_record_clodfront_name
   type    = "A"
 

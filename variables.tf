@@ -23,7 +23,7 @@ variable "private_subnets" {
 }
 
 variable "aws_lb_target_group" {
-  type = string
+  type    = string
   default = "prod-target-group"
 }
 variable "aws_lb_name" {
@@ -32,67 +32,67 @@ variable "aws_lb_name" {
 }
 
 variable "aws_service_discovery_private_dns_namespace_go_name" {
-  type = string
+  type        = string
   description = "was todo"
-  default = "prod-todo"
+  default     = "prod-todo"
 }
 
 variable "aws_service_discovery_service_mongo_name" {
-  type = string
+  type        = string
   description = "was mongo"
-  default = "mongo"
+  default     = "mongo"
 }
 
 variable "aws_ecs_cluster_name" {
-  type = string
+  type        = string
   description = "was todo"
-  default = "prod-todo"
+  default     = "prod-todo"
 }
 
 variable "aws_ecs_task_definition_go_family" {
-  type = string
+  type        = string
   description = "was go"
-  default = "prod-go"
+  default     = "prod-go"
 }
 
 variable "aws_ecs_task_definition_mongo_family" {
-  type = string
+  type        = string
   description = "was mongo"
-  default = "prod-mongo"
+  default     = "prod-mongo"
 }
 
 variable "aws_ecs_service_go_name" {
-  type = string
+  type        = string
   description = "was go"
-  default = "prod-go"
+  default     = "prod-go"
 }
 
 variable "aws_ecs_service_mongo_name" {
-  type = string
+  type        = string
   description = "was mongo"
-  default = "prod-mongo"
+  default     = "prod-mongo"
 }
 
 variable "aws_route53_record_go_name" {
-  type = string
+  type        = string
   description = "was go.ekstodoapp.tk"
-  default = "go.ekstodoapp.tk"
-  
+  default     = "go.ekstodoapp.tk"
+
 }
 
 variable "aws_route53_record_clodfront_name" {
-  type = string
+  type        = string
   description = "www.ekstodoapp.tk"
-  default = "prod.ekstodoapp.tk"
+  default     = "prod.ekstodoapp.tk"
 }
 
 variable "acm_certificate_arn" {
-  type = string
+  type    = string
   default = "arn:aws:acm:us-east-1:882500013896:certificate/fbfa39bf-bdff-43d2-b750-e2d013582462"
 }
 
 variable "prod_json_go" {
-  type = string
+  type    = string
   default = "prod_go.json"
 }
 
@@ -109,11 +109,15 @@ variable "env" {
 }
 
 variable "lambda_arn" {
-  type = string
+  type    = string
   default = "arn:aws:lambda:us-east-1:882500013896:function:hello-js:4"
 }
 
 variable "secret_manager_arn" {
-  type = string
+  type    = string
   default = "arn:aws:secretsmanager:us-east-1:882500013896:secret:nexus-m8ETfq"
+}
+
+variable "public_hosted_zone_id" {
+  type = string
 }

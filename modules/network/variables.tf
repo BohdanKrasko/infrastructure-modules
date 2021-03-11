@@ -87,3 +87,7 @@ variable "go_image" {
 variable "env" {
   type = string
 }
+
+variable "secret_manager_arn" {
+  type = string
+}

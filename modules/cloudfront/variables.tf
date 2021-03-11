@@ -9,3 +9,7 @@ variable "acm_certificate_arn" {
 variable "s3_website_endpoint" {
   type = string
 }
+
+variable "lambda_arn" {
+  type = string
+}

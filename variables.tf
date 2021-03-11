@@ -107,3 +107,13 @@ variable "go_image" {
 variable "env" {
   type = string
 }
+
+variable "lambda_arn" {
+  type = string
+  default = "arn:aws:lambda:us-east-1:882500013896:function:hello-js:4"
+}
+
+variable "secret_manager_arn" {
+  type = string
+  default = "arn:aws:secretsmanager:us-east-1:882500013896:secret:nexus-m8ETfq"
+}

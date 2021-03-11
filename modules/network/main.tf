@@ -134,7 +134,10 @@ resource "aws_service_discovery_service" "mongo" {
 }
 
 
-
+resource "aws_iam_role" "ecs_task_role" {
+  name = "ecs_task_role"
+  managed_policy_arns = ["arn:aws:iam::aws:policy/SecretsManagerReadWrite", "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"]
+}
 
 
 
@@ -147,7 +150,7 @@ resource "aws_ecs_task_definition" "mongo" {
   family                = var.aws_ecs_task_definition_mongo_family
   container_definitions = file("mongo.json")
   network_mode = "awsvpc"
-  execution_role_arn = "arn:aws:iam::882500013896:role/ecsTaskExecutionRole"
+  execution_role_arn = aws_iam_role.ecs_task_role.arn
   
   requires_compatibilities = ["FARGATE"]
   cpu = 256
@@ -161,7 +164,7 @@ resource "aws_ecs_task_definition" "go" {
   {
     "name": "go",
     "repositoryCredentials": {
-      "credentialsParameter": "arn:aws:secretsmanager:us-east-1:882500013896:secret:nexus-m8ETfq"
+      "credentialsParameter": "${var.secret_manager_arn}"
     },
     "image": "${var.go_image}",
     "essential": true,
@@ -181,7 +184,7 @@ resource "aws_ecs_task_definition" "go" {
 ]
 TASK_DEFINITION
   network_mode = "awsvpc"
-  execution_role_arn = "arn:aws:iam::882500013896:role/ecsTaskExecutionRole"
+  execution_role_arn = aws_iam_role.ecs_task_role.arn
   
   requires_compatibilities = ["FARGATE"]
   cpu = 256

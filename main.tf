@@ -27,6 +27,7 @@ module "network" {
   prod_json_go = var.prod_json_go
   go_image = var.go_image
   env = var.env
+  secret_manager_arn = var.secret_manager_arn
 
 }
 
@@ -35,4 +36,5 @@ module "cloudfront" {
   domain_name = var.aws_route53_record_clodfront_name
   acm_certificate_arn = var.acm_certificate_arn
   s3_website_endpoint = module.s3.s3_website_endpoint
+  lambda_arn = var.lambda_arn
 }

@@ -135,7 +135,7 @@ resource "aws_service_discovery_service" "mongo" {
 
 
 resource "aws_iam_role" "ecs_task_role" {
-  name = "ecs_task_role"
+  name = "${var.env}_ecs_task_role"
   assume_role_policy = jsonencode({
     "Version" : "2008-10-17",
     "Statement" : [

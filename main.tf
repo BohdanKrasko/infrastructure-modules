@@ -17,7 +17,7 @@ module "network" {
   aws_route53_record_go_name        = var.aws_route53_record_go_name
   aws_route53_record_clodfront_name = var.aws_route53_record_clodfront_name
   acm_certificate_arn               = var.acm_certificate_arn
-  public_hosted_zone_id             = var.public_hosted_zone_i
+  public_hosted_zone_id             = var.public_hosted_zone_id
 }
 
 module "ecs" {

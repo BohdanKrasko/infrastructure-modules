@@ -54,3 +54,7 @@ variable "aws_lb_target_group_go_arn" {
 variable "aws_service_discovery_service_mongo_name" {
   type = string
 }
+
+variable "aws_lb_go" {
+  type = list(string)
+}

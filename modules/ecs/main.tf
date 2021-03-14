@@ -145,6 +145,6 @@ resource "aws_ecs_service" "go" {
   }
 
   depends_on = [
-    module.network
+    var.aws_lb_go
   ]
 }

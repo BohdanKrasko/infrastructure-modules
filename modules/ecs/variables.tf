@@ -1,12 +1,12 @@
 variable "vpc_id" {
-  type    = string
+  type = string
 }
 
 variable "subnets" {
   type = list(string)
 }
 variable "env" {
-  type    = string
+  type = string
 }
 
 variable "aws_ecs_cluster_name" {
@@ -48,7 +48,7 @@ variable "aws_ecs_service_mongo_name" {
 }
 
 variable "aws_lb_target_group_go_arn" {
-  type        = string
+  type = string
 }
 
 variable "aws_service_discovery_service_mongo_name" {

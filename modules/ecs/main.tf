@@ -143,10 +143,4 @@ resource "aws_ecs_service" "go" {
   lifecycle {
     ignore_changes = [desired_count, tags]
   }
-  /*
-  depends_on = [
-    aws_lb.go,
-    aws_lb_target_group.go
-  ]
-  */
 }

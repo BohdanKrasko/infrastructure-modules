@@ -26,46 +26,7 @@ variable "aws_lb_target_group" {
 variable "aws_lb_name" {
   type = string
 }
-/*
-variable "aws_service_discovery_private_dns_namespace_go_name" {
-  type        = string
-  description = "was todo"
-}
 
-
-variable "aws_service_discovery_service_mongo_name" {
-  type        = string
-  description = "was mongo"
-}
-
-
-variable "aws_ecs_cluster_name" {
-  type        = string
-  description = "was todo"
-}
-
-
-
-variable "aws_ecs_task_definition_go_family" {
-  type        = string
-  description = "was go"
-}
-
-variable "aws_ecs_task_definition_mongo_family" {
-  type        = string
-  description = "was mongo"
-}
-
-variable "aws_ecs_service_go_name" {
-  type        = string
-  description = "was go"
-}
-
-variable "aws_ecs_service_mongo_name" {
-  type        = string
-  description = "was mongo"
-}
-*/
 variable "aws_route53_record_go_name" {
   type        = string
   description = "was go.ekstodoapp.tk"
@@ -79,23 +40,7 @@ variable "aws_route53_record_clodfront_name" {
 variable "acm_certificate_arn" {
   type = string
 }
-/*
-variable "prod_json_go" {
-  type = string
-}
 
-variable "go_image" {
-  type = string
-}
-
-variable "env" {
-  type = string
-}
-
-variable "secret_manager_arn" {
-  type = string
-}
-*/
 variable "public_hosted_zone_id" {
   type = string
 }

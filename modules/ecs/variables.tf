@@ -47,3 +47,7 @@ variable "aws_ecs_service_mongo_name" {
 variable "aws_lb_target_group_go_arn" {
   type        = string
 }
+
+variable "aws_service_discovery_service_mongo_name" {
+  type = string
+}

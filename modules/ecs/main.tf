@@ -104,7 +104,7 @@ resource "aws_ecs_service" "mongo" {
   network_configuration {
     security_groups  = [aws_security_group.mongo_sg.id]
     assign_public_ip = true
-    subnets          = module.network.public_subnets
+    subnets          = var.subnets
   }
 
   launch_type = "FARGATE"
@@ -135,7 +135,7 @@ resource "aws_ecs_service" "go" {
   network_configuration {
     security_groups  = [aws_security_group.go_sg.id]
     assign_public_ip = true
-    subnets          = module.network.public_subnets
+    subnets          = var.subnets
   }
 
   launch_type = "FARGATE"

@@ -31,8 +31,9 @@ module "network" {
 }
 
 module "ecs" {
-  source = "./modules/ecs"
-  vpc_id = module.network.vpc_id
+  source                                              = "./modules/ecs"
+  vpc_id                                              = module.network.vpc_id
+  subnets                                             = module.network.public_subnets
   aws_service_discovery_service_mongo_name            = var.aws_service_discovery_service_mongo_name
   aws_ecs_cluster_name                                = var.aws_ecs_cluster_name
   env                                                 = var.env

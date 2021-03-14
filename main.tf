@@ -35,7 +35,7 @@ module "ecs" {
   aws_ecs_service_mongo_name                          = var.aws_ecs_service_mongo_name
   aws_service_discovery_private_dns_namespace_go_name = var.aws_service_discovery_private_dns_namespace_go_name
   aws_lb_target_group_go_arn                          = module.network.aws_lb_target_group_go_arn
-  aws_lb_go = module.network.aws_lb_go
+  aws_lb_go                                           = module.network.aws_lb_go
 }
 
 module "cloudfront" {

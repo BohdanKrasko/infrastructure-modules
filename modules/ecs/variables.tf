@@ -56,5 +56,5 @@ variable "aws_service_discovery_service_mongo_name" {
 }
 
 variable "aws_lb_go" {
-  type    = any
+  type = any
 }

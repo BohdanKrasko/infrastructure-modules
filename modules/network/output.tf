@@ -6,4 +6,8 @@ output "public_subnets" {
   value = data.aws_subnet_ids.public.ids
 }
 
+output "aws_lb_target_group_go_arn" {
+  value = aws_lb_target_group.go.arn
+}
+
 

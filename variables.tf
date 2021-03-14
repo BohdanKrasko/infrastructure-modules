@@ -90,12 +90,12 @@ variable "acm_certificate_arn" {
   type    = string
   default = "arn:aws:acm:us-east-1:882500013896:certificate/fbfa39bf-bdff-43d2-b750-e2d013582462"
 }
-
+/*
 variable "prod_json_go" {
   type    = string
   default = "prod_go.json"
 }
-
+*/
 variable "s3_bucket_name" {
   type = string
 }

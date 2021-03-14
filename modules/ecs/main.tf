@@ -143,4 +143,8 @@ resource "aws_ecs_service" "go" {
   lifecycle {
     ignore_changes = [desired_count, tags]
   }
+
+  depends_on = [
+    module.network
+  ]
 }

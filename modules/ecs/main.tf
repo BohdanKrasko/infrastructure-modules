@@ -38,7 +38,6 @@ resource "aws_iam_role" "ecs_task_role" {
       }
     ]
   })
-  //managed_policy_arns = ["arn:aws:iam::aws:policy/SecretsManagerReadWrite", "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"]
 }
 
 resource "aws_iam_policy_attachment" "secret_manager" {
